@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace可以随意命名，一般约定写相应类的全路径 -->
+<mapper namespace="com.shenzhenair.source.mapper.slaver.StudentMapper">
+
+    <resultMap id="studentMap" type="com.shenzhenair.source.bean.slaver.Student">
+        <id column="STUDENT_NO" property="studentNo"/>
+        <id column="NAME" property="name"/>
+
+    </resultMap>
+
+    <insert id="insert" parameterType="com.shenzhenair.source.bean.slaver.Student">
+        INSERT INTO T_STUDENT_INFO (
+            STUDENT_NO,
+            NAME
+        ) VALUES (
+            #{studentNo,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR}
+        )
+    </insert>
+
+<!--    <update id="update" parameterType="com.shenzhenair.common.bean.AutoTicketInfo">
+        UPDATE T_AUTO_TICKET_INFO t SET
+        <trim suffixOverrides=",">
+            <if test="status != null">
+                t.STATUS = #{status},
+            </if>
+            <if test="finishTime != null and finishTime != ''">
+                t.FINISH_TIME = #{finishTime},
+            </if>
+        </trim>
+        WHERE t.TICKET_NO = #{ticketNo}
+    </update>-->
+
+    <select id="selectOneById" parameterType="string" resultMap="studentMap">
+        SELECT t.*
+        FROM T_STUDENT_INFO t
+        WHERE t.STUDENT_NO = #{id}
+    </select>
+
+ <!--   <select id="selectOne" parameterType="com.shenzhenair.common.query.AutoTicketInfoQuery" resultMap="autoTicketInfoMap">
+        SELECT t.* FROM T_AUTO_TICKET_INFO t WHERE 1=1
+        <if test="status != null">
+            AND t.STATUS = #{status}
+        </if>
+        <if test="ifSync != null">
+            AND t.IF_SYNC = #{ifSync}
+        </if>
+        <if test="officeNo != null and officeNo != ''">
+            AND t.OFFICE_NO = #{officeNo}
+        </if>
+        <if test="passType != null">
+            AND t.PASS_TYPE = #{passType}
+        </if>
+        <if test="smallPnr != null and smallPnr !=''">
+            AND t.SMALL_PNR = #{smallPnr}
+        </if>
+        <if test="ticketNo != null and ticketNo != ''">
+            AND t.TICKET_NO LIKE '%'||#{ticketNo}||'%'
+        </if>
+        <if test="outNo != null and outNo != ''">
+            AND t.OUT_NO LIKE '%'||#{outNo}||'%'
+        </if>
+        <if test="sellerCode != null and sellerCode !=''">
+            AND t.SELLER_CODE = #{sellerCode}
+        </if>
+        <if test="linkman != null and linkman != ''">
+            AND t.LINKMAN LIKE '%'||#{linkman}||'%'
+        </if>
+    </select>-->
+
+  <!--  <select id="selectList" parameterType="com.shenzhenair.common.query.AutoTicketInfoQuery"  resultMap="autoTicketInfoMap">
+        SELECT t.* FROM T_AUTO_TICKET_INFO t WHERE 1=1
+        <if test="status != null">
+            AND t.STATUS = #{status}
+        </if>
+        <if test="ifSync != null">
+            AND t.IF_SYNC = #{ifSync}
+        </if>
+        <if test="officeNo != null and officeNo != ''">
+            AND t.OFFICE_NO = #{officeNo}
+        </if>
+        <if test="passType != null">
+            AND t.PASS_TYPE = #{passType}
+        </if>
+        <if test="smallPnr != null and smallPnr !=''">
+            AND t.SMALL_PNR = #{smallPnr}
+        </if>
+        <if test="ticketNo != null and ticketNo != ''">
+            AND t.TICKET_NO LIKE '%'||#{ticketNo}||'%'
+        </if>
+        <if test="outNo != null and outNo != ''">
+            AND t.OUT_NO LIKE '%'||#{outNo}||'%'
+        </if>
+        <if test="sellerCode != null and sellerCode !=''">
+            AND t.SELLER_CODE = #{sellerCode}
+        </if>
+        <if test="linkman != null and linkman != ''">
+            AND t.LINKMAN LIKE '%'||#{linkman}||'%'
+        </if>
+    </select>-->
+</mapper>
